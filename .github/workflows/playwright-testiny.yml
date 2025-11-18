@@ -41,6 +41,12 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test --reporter=junit
 
+      - name: Upload Playwright test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-results
+          path: test-results/
+
       - name: Upload results to Testiny
         run: |
           npx testiny automation \
