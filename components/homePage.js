@@ -1,4 +1,4 @@
-class HomePage {
+export class HomePage {
   /**
    * @param {import('@playwright/test').Page} page
    */
@@ -227,5 +227,3 @@ class HomePage {
     }
   }
 }
-
-module.exports = { HomePage };

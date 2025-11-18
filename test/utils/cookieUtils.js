@@ -3,7 +3,7 @@
  * Handles cookie consent dialog dismissal
  */
 
-async function acceptCookies(page) {
+export async function acceptCookies(page) {
   try {
     // Wait for cookie consent dialog and accept it
     const cookieButton = page.getByRole("button", { name: "Accept All" });
@@ -15,5 +15,3 @@ async function acceptCookies(page) {
     // Cookie dialog may not always appear, continue without error
   }
 }
-
-module.exports = { acceptCookies };

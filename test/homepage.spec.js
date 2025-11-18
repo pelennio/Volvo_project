@@ -1,5 +1,5 @@
-const { test, expect } = require("@playwright/test");
-const { HomePage } = require("../components/homePage");
+import { test, expect } from "@playwright/test";
+import { HomePage } from "../components/homePage.js";
 
 test.describe("Volvo Cars US Homepage Tests", () => {
   let homePage;
