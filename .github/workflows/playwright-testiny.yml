@@ -29,7 +29,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Playwright browsers
+      - name: Install Playwright browsers (Chromium only)
         run: npx playwright install chromium
 
       - name: Install Testiny CLI locally
@@ -39,7 +39,7 @@ jobs:
         run: mkdir -p test-results
 
       - name: Run Playwright tests
-        run: npx playwright test --reporter=junit
+        run: npx playwright test --reporter=junit --output test-results/ --headless
 
       - name: Upload Playwright test results
         uses: actions/upload-artifact@v4
@@ -52,4 +52,5 @@ jobs:
           npx testiny automation \
             --project "YOUR_PROJECT_KEY_OR_ID" \
             --source "ui-tests" \
-            --junit test-results/results.xml
+            --junit test-results/results.xml \
+            --token ${{ secrets.TESTINY_API_KEY }}
