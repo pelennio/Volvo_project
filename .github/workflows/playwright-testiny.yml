@@ -55,8 +55,8 @@ jobs:
 
       - name: Upload results to Testiny
         run: |
-          npx testiny automation \
-            --project "YOUR_PROJECT_KEY_OR_ID" \
+          npx testiny automation:upload \
+            --project "Volvo_portfolio" \
             --source "ui-tests" \
             --junit test-results/results.xml \
             --token ${{ secrets.TESTINY_API_KEY }}
