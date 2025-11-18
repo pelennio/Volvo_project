@@ -40,7 +40,11 @@ jobs:
         run: mkdir -p test-results
 
       - name: Run Playwright tests
-        run: npx playwright test --reporter=json=test-results/results.json
+        run: |
+          npx playwright test \
+            --reporter=json=test-results/results.json \
+            --reporter=html \
+            --output=test-results
         continue-on-error: true
 
       - name: Upload Playwright test results
@@ -50,9 +54,8 @@ jobs:
           path: |
             test-results
             playwright-report
-            test-results/**/*.md
-            test-results/**/*.png
-            test-results/**/*.zip
+      - name: List test-results folder
+        run: ls -R test-results
 
       - name: Upload results to Testiny
         if: ${{ !cancelled() }}
