@@ -29,8 +29,8 @@ jobs:
 
     - name: Run tests and report to Testmo
       env:
-        TESTMO_URL: ${{ secrets.https://pelennio.testmo.net }}
-        TESTMO_TOKEN: ${{ secrets.testmo_api_eyJpdiI6IkRPbG1GekdaNTA0V2tUd3lsbGxORGc9PSIsInZhbHVlIjoiREQ3VkdRcmdFVlNnWC8zRUJ5eENCQ1VYNFlVWTU4eFc2MldFSXEza2FlYz0iLCJtYWMiOiI5M2YyOGVhZTczZmZkMGEyMzkxYmNjZDJiNzAxZjU5OTMxOWUzMTQ0ZWIxYTI2YjQ1ZDYyYTc1YjdjMTVhZjRkIiwidGFnIjoiIn0= }}
+        TESTMO_URL: ${{ secrets.TESTMO_URL }}
+        TESTMO_TOKEN: ${{ secrets.TESTMO_TOKEN }}
       run: |
         testmo automation:run \
           --instance "$TESTMO_URL" \
