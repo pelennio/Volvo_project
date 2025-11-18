@@ -9,6 +9,13 @@ export default defineConfig({
   use: {
     baseURL: "https://www.volvocars.com/us/",
     headless: true, // false only for local debugging
+    extraHTTPHeaders: {
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "Accept-Language": "en-US,en;q=0.9",
+      Accept:
+        "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    },
     viewport: { width: 1280, height: 720 },
     actionTimeout: 10 * 1000, // wait max 10s for actions
     launchOptions: {
