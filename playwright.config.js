@@ -14,6 +14,10 @@ export default defineConfig({
     launchOptions: {
       slowMo: 50, // slows down actions for easier debugging
     },
+
+    screenshot: "only-on-failure",
+    video: "retain-on-failure",
+    trace: "on-first-retry",
   },
 
   projects: [
