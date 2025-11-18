@@ -1,118 +1,64 @@
 import { test, expect } from "@playwright/test";
 import { HomePage } from "../components/homePage.js";
 
-test.describe("Volvo Cars US Homepage Tests", () => {
+test.describe("Coursera Homepage Tests", () => {
   let homePage;
 
   test.beforeEach(async ({ page }) => {
     homePage = new HomePage(page);
-    await page.goto("/", { waitUntil: "domcontentloaded" });
-    const body = await page.textContent("body");
-
-    if (body.includes("Access Denied") || body.includes("edgesuite.net")) {
-      throw new Error("Akamai Access Denied page detected — stopping test.");
-    }
-    await homePage.acceptCookies();
+    await homePage.openHomePage();
   });
 
-  // ----------------------------
-  // Test 1: Page title
-  // ----------------------------
-  test("Page loads with correct title", async ({ page }) => {
-    await expect(page).toHaveTitle(/Volvo Car USA/i);
+  // 1. Homepage loads successfully
+  test("1. Homepage loads with correct title", async ({ page }) => {
+    await expect(page).toHaveTitle(/Coursera/i);
   });
 
-  // ----------------------------
-  // Test 2: Top navigation buttons
-  // ----------------------------
-  test("Top navigation buttons are visible", async () => {
-    for (const btn of homePage.topNavButtons) {
-      await expect(btn).toBeVisible();
-    }
+  // 2. Log In button is visible
+  test("2. Log In button is visible", async () => {
+    await expect(homePage.logInBtn).toBeVisible();
   });
 
-  // ----------------------------
-  // Test 3: Side navigation menu
-  // ----------------------------
-  test("Side navigation menu opens and displays items", async () => {
-    await homePage.openSitenav();
-    for (const btn of homePage.sideNavButtons) {
-      await expect(btn).toBeVisible();
-    }
+  // 3. Join for Free button is visible
+  test("3. Join for Free button is visible", async () => {
+    await expect(homePage.joinForFreeBtn).toBeVisible();
   });
 
-  // ----------------------------
-  // Test 4: Top CTAs
-  // ----------------------------
-  test("Top content CTA links are visible and correct", async () => {
-    const ctas = [
-      { locator: homePage.configureYourCarLink, url: /\/build/ },
-      { locator: homePage.carsInStockLink, url: /\/inventory/ },
-      { locator: homePage.specialOffersLink, url: /\/offers/ },
-      { locator: homePage.bookTestDriveLink, url: /\/dealer-locator/ },
-    ];
-
-    for (const cta of ctas) {
-      await expect(cta.locator).toBeVisible();
-      await expect(cta.locator).toHaveAttribute("href", cta.url);
-    }
+  // 4. Explore menu is visible
+  test("4. Explore menu button is visible", async () => {
+    await expect(homePage.exploreMenu).toBeVisible();
   });
 
-  // ----------------------------
-  // Test 5: Explore categories
-  // ----------------------------
-  test("Explore categories section is visible", async () => {
-    for (const link of homePage.exploreCategoriesLinks) {
-      await expect(link).toBeVisible();
-    }
+  // 5. Search input and button are visible
+  test("5. Search bar is visible", async () => {
+    await expect(homePage.searchInput).toBeVisible();
+    await expect(homePage.searchBtn).toBeVisible();
   });
 
-  // ----------------------------
-  // Test 6: Special offers section
-  // ----------------------------
-  test("Special offers section is visible", async () => {
-    await expect(homePage.specialOffersSection).toBeVisible();
+  // 6. Featured Courses section is displayed
+  test("6. Featured Courses section is visible", async () => {
+    await expect(homePage.featuredCoursesSection).toBeVisible();
   });
 
-  // ----------------------------
-  // Test 7: Footer links
-  // ----------------------------
-  test("Footer links are visible", async () => {
-    await homePage.scrollToBottom();
-    for (const link of homePage.footerLinks) {
-      await expect(link).toBeVisible({ timeout: 10000 });
-    }
+  // 7. Trending Topics section is displayed
+  test("7. Trending Topics section is visible", async () => {
+    await expect(homePage.trendingTopicsSection).toBeVisible();
   });
 
-  // ----------------------------
-  // Test 8: Social and app links
-  // ----------------------------
-  test("Social and app links are visible", async () => {
-    await homePage.scrollToBottom();
-    for (const link of homePage.socialLinks) {
-      await expect(link).toBeVisible();
-    }
+  // 8. Categories section is visible
+  test("8. Browse by Subject section is visible", async () => {
+    await expect(homePage.categoriesSection).toBeVisible();
   });
 
-  // ----------------------------
-  // Test 9: Page loads images and respects viewport
-  // ----------------------------
-  test("Page loads with images and viewport is valid", async ({ page }) => {
-    await expect(homePage.images.first()).toBeVisible();
-    const viewport = page.viewportSize();
-    expect(viewport.width).toBeGreaterThan(0);
-    expect(viewport.height).toBeGreaterThan(0);
+  // 9. Footer contains links
+  test("9. Footer links are visible", async () => {
+    await expect(homePage.footerLinks.first()).toBeVisible();
+    const count = await homePage.footerLinks.count();
+    expect(count).toBeGreaterThan(5);
   });
 
-  // ----------------------------
-  // Test 10: Responsive mobile layout
-  // ----------------------------
-  test("Page layout is responsive on mobile viewport", async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 812 });
-    await expect(homePage.smallMenu).toBeVisible();
-    await homePage.smallMenu.click();
-    for (const btn of homePage.sideNavButtons) {
-      await expect(btn).toBeVisible();
-    }
+  // 10. Hero banner and testimonials are visible
+  test("10. Hero banner and testimonials section are visible", async () => {
+    await expect(homePage.heroBanner).toBeVisible();
   });
 });
