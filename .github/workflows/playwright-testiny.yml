@@ -40,7 +40,7 @@ jobs:
         run: mkdir -p test-results
 
       - name: Run Playwright tests
-        run: npx playwright test --reporter=json --output=test-results
+        run: npx playwright test --reporter=json=test-results/results.json
         continue-on-error: true
 
       - name: Upload Playwright test results
@@ -56,8 +56,6 @@ jobs:
 
       - name: Upload results to Testiny
         if: ${{ !cancelled() }}
-
         env:
           TESTINY_API_KEY: ${{ secrets.TESTINY_API_KEY }}
-
         run: npx @testiny/cli automation --project 1 --source e2e-tests --playwright test-results/results.json
