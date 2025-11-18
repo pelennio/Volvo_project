@@ -45,7 +45,6 @@ jobs:
             --reporter=json=test-results/results.json \
             --reporter=html \
             --output=test-results \
-            --continue-on-failure
         continue-on-error: true
 
       - name: Ensure results.json exists
