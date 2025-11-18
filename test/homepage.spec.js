@@ -11,6 +11,7 @@ test.describe("Coursera Homepage Tests", () => {
 
   // 1. Homepage loads successfully
   test("1. Homepage loads with correct title", async ({ page }) => {
+    console.log("Page title is:", await page.title());
     await expect(page).toHaveTitle(/Coursera/i);
   });
 
