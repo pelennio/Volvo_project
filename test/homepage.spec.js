@@ -6,10 +6,11 @@ test.describe("Volvo Cars US Homepage Tests", () => {
 
   test.beforeEach(async ({ page }) => {
     homePage = new HomePage(page);
-    await page.goto("/");
-    const url = page.url();
-    if (url.includes("errors.edgesuite.net") || url.includes("AccessDenied")) {
-      throw new Error(`Akamai Access Denied page detected. URL: ${url}`);
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+    const body = await page.textContent("body");
+
+    if (body.includes("Access Denied") || body.includes("edgesuite.net")) {
+      throw new Error("Akamai Access Denied page detected — stopping test.");
     }
     await homePage.acceptCookies();
   });
