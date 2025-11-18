@@ -42,7 +42,7 @@ jobs:
         run: npx playwright test --reporter=junit
 
       - name: Upload Playwright test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: playwright-results
           path: test-results/
