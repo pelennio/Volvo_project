@@ -1,4 +1,4 @@
-const { defineConfig, devices } = require("@playwright/test");
+import { defineConfig, devices } from '@playwright/test';
 import { defineConfig } from "@playwright/test";
 
 module.exports = defineConfig({
