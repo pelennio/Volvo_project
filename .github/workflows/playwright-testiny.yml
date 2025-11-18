@@ -55,7 +55,7 @@ jobs:
 
       - name: Upload results to Testiny
         run: |
-          npx testiny automation:upload \
+          npx testiny automation \
             --project "Volvo_portfolio" \
             --source "ui-tests" \
             --junit test-results/results.xml \
