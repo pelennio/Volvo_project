@@ -12,6 +12,6 @@
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.56.1",
-    "@testmo/testmo-cli": "^1.4.5"
+    "@testiny/cli": "^1.29.0"
   }
 }
